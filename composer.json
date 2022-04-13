@@ -1,0 +1,16 @@
+{
+    "name": "carlosfgti/php-tdd",
+    "description": "PHP With TDD",
+    "authors": [
+        {
+            "name": "Carlos Ferreira",
+            "email": "carlos@especializati.com.br"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/Core/"
+        }
+    },
+    "require": {}
+}
