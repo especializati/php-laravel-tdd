@@ -5,6 +5,7 @@ namespace Tests\Feature\App\Repository\Eloquent;
 use App\Models\User;
 use App\Repository\Contracts\UserRepositoryInterface;
 use App\Repository\Eloquent\UserRepository;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -60,5 +61,17 @@ class UserRepositoryTest extends TestCase
         $this->assertDatabaseHas('users', [
             'email' => 'carlos@especializati.com.br',
         ]);
+    }
+
+    public function test_create_exception()
+    {
+        $this->expectException(QueryException::class);
+
+        $data = [
+            'name' => 'Carlos Ferreira',
+            'password' => bcrypt('12345678'),
+        ];
+
+        $this->repository->create($data);
     }
 }
