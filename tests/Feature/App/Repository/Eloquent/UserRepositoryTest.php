@@ -3,6 +3,7 @@
 namespace Tests\Feature\App\Repository\Eloquent;
 
 use App\Models\User;
+use App\Repository\Contracts\UserRepositoryInterface;
 use App\Repository\Eloquent\UserRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -10,6 +11,14 @@ use Tests\TestCase;
 
 class UserRepositoryTest extends TestCase
 {
+    public function test_implements_interface()
+    {
+        $this->assertInstanceOf(
+            UserRepositoryInterface::class,
+            new UserRepository(new User())
+        );
+    }
+
     public function test_find_all_empty()
     {
         $repository = new UserRepository(new User());
