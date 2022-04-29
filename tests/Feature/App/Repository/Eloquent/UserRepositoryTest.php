@@ -74,4 +74,21 @@ class UserRepositoryTest extends TestCase
 
         $this->repository->create($data);
     }
+
+    public function test_update()
+    {
+        $user = User::factory()->create();
+
+        $data = [
+            'name' => 'new name',
+        ];
+
+        $response = $this->repository->update($user->email, $data);
+
+        $this->assertNotNull($response);
+        $this->assertIsObject($response);
+        $this->assertDatabaseHas('users', [
+            'name' => 'new name',
+        ]);
+    }
 }
