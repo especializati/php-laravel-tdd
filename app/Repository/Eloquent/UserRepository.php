@@ -3,8 +3,10 @@
 namespace App\Repository\Eloquent;
 
 use App\Models\User;
+use App\Repository\Contracts\PaginationInterface;
 use App\Repository\Contracts\UserRepositoryInterface;
 use App\Repository\Exceptions\NotFoundException;
+use App\Repository\Presenters\PaginationPresenter;
 use Exception;
 
 class UserRepository implements UserRepositoryInterface
@@ -21,9 +23,9 @@ class UserRepository implements UserRepositoryInterface
         return $this->model->get()->toArray();
     }
 
-    public function paginate()
+    public function paginate(int $page = 1): PaginationInterface
     {
-        return $this->model->paginate();
+        return new PaginationPresenter($this->model->paginate());
     }
 
     public function create(array $data): object
