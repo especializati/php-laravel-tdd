@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Repository\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,8 @@ class UserController extends Controller
 
     public function index()
     {
-        return $this->repository->findAll();
+        $users = collect($this->repository->findAll());
+
+        return UserResource::collection($users);
     }
 }

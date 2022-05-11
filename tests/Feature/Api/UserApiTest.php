@@ -15,7 +15,9 @@ class UserApiTest extends TestCase
     public function test_get_all_empty()
     {
         $response = $this->getJson($this->endpoint);
+
         $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonCount(0, 'data');
     }
 
     public function test_get_all()
@@ -23,7 +25,7 @@ class UserApiTest extends TestCase
         User::factory()->count(20)->create();
 
         $response = $this->getJson($this->endpoint);
-
+        // $response->dump();
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonCount(20, 'data');
     }
