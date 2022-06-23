@@ -99,4 +99,19 @@ class UserApiTest extends TestCase
             ]
         ];
     }
+
+    public function test_find()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->getJson("{$this->endpoint}/{$user->email}");
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'name',
+                'email',
+            ]
+        ]);
+    }
 }
