@@ -160,4 +160,12 @@ class UserApiTest extends TestCase
             ],
         ];
     }
+
+    public function test_update_not_found()
+    {
+        $response = $this->putJson("{$this->endpoint}/fake_value", [
+            'name' => 'Carlos Ferreira'
+        ]);
+        $response->assertStatus(Response::HTTP_NOT_FOUND);
+    }
 }
