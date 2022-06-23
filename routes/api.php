@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\{
 };
 use Illuminate\Support\Facades\Route;
 
+Route::delete('/users/{email}', [UserController::class, 'destroy']);
 Route::put('/users/{email}', [UserController::class, 'update']);
 Route::get('/users/{email}', [UserController::class, 'show']);
 Route::post('/users', [UserController::class, 'store']);

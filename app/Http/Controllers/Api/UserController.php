@@ -56,4 +56,11 @@ class UserController extends Controller
 
         return new UserResource($user);
     }
+
+    public function destroy($email)
+    {
+        $this->repository->delete($email);
+
+        return response()->noContent();
+    }
 }
