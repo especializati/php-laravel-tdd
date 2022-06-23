@@ -74,4 +74,15 @@ class UserApiTest extends TestCase
             ]
         ]);
     }
+
+    public function test_create_validations()
+    {
+        $payload = [
+            'email' => 'carlos@especializati.com.br',
+            'password' => '12345678',
+        ];
+
+        $response = $this->postJson($this->endpoint, $payload);
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
 }
