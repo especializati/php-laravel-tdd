@@ -114,4 +114,10 @@ class UserApiTest extends TestCase
             ]
         ]);
     }
+
+    public function test_find_not_found()
+    {
+        $response = $this->getJson("{$this->endpoint}/fake_value");
+        $response->assertStatus(Response::HTTP_NOT_FOUND);
+    }
 }
