@@ -120,4 +120,17 @@ class UserApiTest extends TestCase
         $response = $this->getJson("{$this->endpoint}/fake_value");
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
+
+    public function test_update()
+    {
+        $user = User::factory()->create();
+
+        $payload = [
+            'name' => 'Name Updated',
+            'password' => 'new_password'
+        ];
+
+        $response = $this->putJson("{$this->endpoint}/{$user->email}", $payload);
+        $response->assertStatus(Response::HTTP_OK);
+    }
 }
