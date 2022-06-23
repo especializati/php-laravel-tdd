@@ -32,4 +32,11 @@ class UserController extends Controller
                             ]
                         ]);
     }
+
+    public function store(Request $request)
+    {
+        $user = $this->repository->create($request->all());
+
+        return new UserResource($user);
+    }
 }
